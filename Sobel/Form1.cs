@@ -55,13 +55,20 @@ namespace Sobel
                 List<Bitmap> images = new List<Bitmap>();                
                 int partWidth = inputImage.Width / partCount;
                 //нарезка изображения
-                for (int i = 0; i < partCount; i++)
+                for (int i = 0; i < partCount - 1; i++)
                 {
                     images.Add(new Bitmap(partWidth, inputImage.Height));                    
                     var graphics = Graphics.FromImage(images[i]);
-                    graphics.DrawImage(inputImage.ToBitmap(), new Rectangle(0, 0, partWidth, inputImage.Height), new Rectangle(partWidth * i, 0, partWidth, inputImage.Height), GraphicsUnit.Pixel);
+                    graphics.DrawImage(inputImage.ToBitmap(), new Rectangle(0, 0, partWidth, inputImage.Height), 
+                        new Rectangle(partWidth * i, 0, partWidth, inputImage.Height), GraphicsUnit.Pixel);
                     graphics.Dispose();
                 }
+                //последняя часть с остатком
+                images.Add(new Bitmap(partWidth + (inputImage.Width % partCount), inputImage.Height));
+                var graphic = Graphics.FromImage(images[partCount - 1]);
+                graphic.DrawImage(inputImage.ToBitmap(), new Rectangle(0, 0, partWidth + (inputImage.Width % partCount), inputImage.Height),
+                    new Rectangle(partWidth * (partCount - 1), 0, partWidth + (inputImage.Width % partCount), inputImage.Height), GraphicsUnit.Pixel);
+                graphic.Dispose();
                 //перевод изображений в черно-белый вариант
                 List<Image<Gray, byte>> grays = new List<Image<Gray, byte>>();
                 for (int i = 0; i < partCount; i++)
@@ -80,11 +87,18 @@ namespace Sobel
                 }
                 //склейка итогового изображения
                 Bitmap result = new Bitmap(filePath);
-                for (int i = 0; i < partCount; i++)
+                for (int i = 0; i < partCount - 1; i++)
                 {
                     var graphics = Graphics.FromImage(result);
-                    graphics.DrawImage(sobels[i].ToBitmap(), new Rectangle(partWidth * i, 0, partWidth, inputImage.Height), new Rectangle(0, 0, partWidth, inputImage.Height), GraphicsUnit.Pixel);
+                    graphics.DrawImage(sobels[i].ToBitmap(), new Rectangle(partWidth * i, 0, partWidth, inputImage.Height),
+                        new Rectangle(0, 0, partWidth, inputImage.Height), GraphicsUnit.Pixel);
+                    graphics.Dispose();
                 }
+                //последняя часть с остатком
+                graphic = Graphics.FromImage(result);
+                graphic.DrawImage(sobels[partCount - 1].ToBitmap(), new Rectangle(partWidth * (partCount - 1), 0, partWidth + (inputImage.Width % partCount), inputImage.Height),
+                    new Rectangle(0, 0, partWidth + (inputImage.Width % partCount), inputImage.Height), GraphicsUnit.Pixel);
+                graphic.Dispose();
                 pictureBox2.Image = result;
             }
             catch (Exception ex)
