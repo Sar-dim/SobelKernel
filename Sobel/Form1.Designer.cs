@@ -31,11 +31,11 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.convertToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveResultToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.saveResultToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -69,6 +69,13 @@
             this.convertToolStripMenuItem.Text = "Convert";
             this.convertToolStripMenuItem.Click += new System.EventHandler(this.convertToolStripMenuItem_Click);
             // 
+            // saveResultToolStripMenuItem
+            // 
+            this.saveResultToolStripMenuItem.Name = "saveResultToolStripMenuItem";
+            this.saveResultToolStripMenuItem.Size = new System.Drawing.Size(94, 24);
+            this.saveResultToolStripMenuItem.Text = "Save result";
+            this.saveResultToolStripMenuItem.Click += new System.EventHandler(this.saveResultToolStripMenuItem_Click);
+            // 
             // pictureBox1
             // 
             this.pictureBox1.Location = new System.Drawing.Point(12, 31);
@@ -90,7 +97,7 @@
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
-            this.openFileDialog1.Filter = "Image files (*.png;*.jpeg)|*.png;*.jpeg|All files (*.*)|*.*";
+            this.openFileDialog1.Filter = "Image files (*.png;*.jpg)|*.png;*.jpg|All files (*.*)|*.*";
             // 
             // textBox1
             // 
@@ -99,13 +106,6 @@
             this.textBox1.Size = new System.Drawing.Size(203, 22);
             this.textBox1.TabIndex = 3;
             this.textBox1.Text = "Введите количество частей";
-            // 
-            // saveResultToolStripMenuItem
-            // 
-            this.saveResultToolStripMenuItem.Name = "saveResultToolStripMenuItem";
-            this.saveResultToolStripMenuItem.Size = new System.Drawing.Size(94, 24);
-            this.saveResultToolStripMenuItem.Text = "Save result";
-            this.saveResultToolStripMenuItem.Click += new System.EventHandler(this.saveResultToolStripMenuItem_Click);
             // 
             // Form1
             // 
